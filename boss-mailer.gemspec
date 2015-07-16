@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'boss/mailer/version'
+require 'boss_mailer/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "boss-mailer"
-  spec.version       = Boss::Mailer::VERSION
+  spec.version       = BossMailer::VERSION
   spec.authors       = ["Dennis Haegler"]
   spec.email         = ["d.haegler@hotmail.de"]
 
