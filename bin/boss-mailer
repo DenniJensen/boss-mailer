@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'boss_mailer'
+require 'boss_mailer/time_parser'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.on("--init", "inialize empty setting in home dir") do
+    options[:init] = true
+  end
+end.parse!
+
+if options[:init]
+  # TODO Unless Config exist do copy of template in HOME
+  puts 'not yet implemented'
+end
+
+#TODO if config still empty -> else start continue
+
+if ARGV.size < 3
+  puts 'Need start, end and pause of work'
+  exit 1
+end
+
+time_parser = BossMailer::TimeParser.new
+
+working_time = {
+  start: time_parser.parse(ARGV.shift),
+  end: time_parser.parse(ARGV.shift),
+  pause: time_parser.parse(ARGV.shift)
+}
+
+p working_time
