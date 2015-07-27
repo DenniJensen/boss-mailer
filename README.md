@@ -1,37 +1,60 @@
 [![Build Status](https://magnum.travis-ci.com/DenniJensen/boss-mailer.svg?token=LXPadLLZHBGUqXF9dTdc)](https://magnum.travis-ci.com/DenniJensen/boss-mailer)
 
 # Boss::Mailer
-This is a gem to mail the working hours to your.
+This is a gem to mail the working hours form the terminal
+to your boss.
 
-under construction.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Just install via Rubygems
 
 ```ruby
 gem 'boss-mailer'
 ```
 
-And then execute:
+```ruby
+boss-mailer --init
+```
 
-    $ bundle
+In your home path you will find now a file like:
 
-Or install it yourself as:
-
-    $ gem install boss-mailer
+```yaml
+:mail_settings:
+  :from:
+  :to:
+  :subject:
+  :options:
+    :address: "smtp.gmail.com",
+    :port: 587
+    :user_name: '<username>',
+    :password: '<password>',
+    :authentication: 'plain',
+    :enable_starttls_auto: true
+```
+Fill in your settings for you mailing hoster and the address for boss.
 
 ## Usage
+The Bossmailer provides a simple CLI. The boss-mailer needs 3 arguments.
+The time from the beginning of the day, from the ending and you pause time.
 
-TODO: Write usage instructions here
+For example
+`boss-mailer HH:MM HH:MM HH:MM`
 
-## Development
+To provide a quick usage your can just time the hour and the boss-mailer will
+parse it for you.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+boss-mailer 9 18 0055
+```
+will be get translated into
+```
+boss-mailer 09:00 18:00 00:55
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+**Pause time** needs the leading zeros in this version (0.1.0)
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/boss-mailer.
+Bug reports and pull requests are welcome on GitHub at https://github.com/DenniJensen/boss-mailer.
 
