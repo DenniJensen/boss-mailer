@@ -5,20 +5,45 @@ require 'boss_mailer/time_parser'
 require 'boss_mailer/mailer'
 require 'optparse'
 require 'mail'
+require 'yaml'
 
 options = {}
 OptionParser.new do |opts|
   opts.on("--init", "inialize empty setting in home dir") do
     options[:init] = true
   end
+  opts.on("--force", 'forces to create a new config file') do
+    options[:force] = true
+  end
 end.parse!
 
+config_path = ENV['HOME'] + '/.boss-mailer.yml'
+
 if options[:init]
-  # TODO Unless Config exist do copy of template in HOME
-  puts 'not yet implemented'
+  if File.exists?(config_path) && !options[:force]
+    puts "file alread exists in #{config_path}"
+    puts "Use --init --force to reinstall config file"
+    exit 0
+  else
+    FileUtils.cp('config_file_example.yml', config_path)
+    puts "Config File created in #{config_path}"
+  end
 end
 
-#TODO if config still empty -> else start continue
+begin
+  config = YAML.load_file(config_path)
+rescue
+  puts 'No Config file found, please use --init to initialize one'
+  puts 'After creating a config file, please fill in the mail informations'
+  exit 1
+end
+
+mailer_settings = config[:mail_settings]
+
+unless mailer_settings[:to] or mailer_settings[:from] or mailer_settings[:subject]
+  puts "Configuration is missing in: #{config_path}"
+  exit 1
+end
 
 if ARGV.size < 3
   puts 'Need start, end and pause of work'
@@ -33,13 +58,7 @@ working_time = {
   pause: time_parser.parse(ARGV.shift)
 }
 
-mailer_setting = {
-  to: 'test@test.com',
-  from: 'test@toast.com',
-  subject: 'HALLO DAS IST EIN TEST'
-}
-
-mailer = BossMailer::Mailer.new mailer_setting, working_time
+mailer = BossMailer::Mailer.new mailer_settings, working_time
 mailer.mail
 
 
