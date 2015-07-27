@@ -8,10 +8,15 @@ Gem::Specification.new do |spec|
   spec.version       = BossMailer::VERSION
   spec.authors       = ["Dennis Haegler"]
   spec.email         = ["d.haegler@hotmail.de"]
+  spec.licenses      = ['MIT']
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{
+    This is a gem to mail the working hours form the terminal to your boss. }
+  spec.description   = %q{
+    This is a gem to mail the working hours form the terminal to your boss.
+    You can write email from the terminal to your boss. (Or anyone you want
+    to mail your working time)
+    }
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
