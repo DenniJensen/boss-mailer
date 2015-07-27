@@ -16,7 +16,7 @@ module BossMailer
     private
 
     def mail_body
-      "
+      "#{Time.now.strftime("%a: %d/%m/%Y")}\n\
       \nStart #{@working_hours[:start]}\
       \nEnde #{@working_hours[:end]}\
       \nPause #{@working_hours[:pause]}"
