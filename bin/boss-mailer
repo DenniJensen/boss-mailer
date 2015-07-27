@@ -4,7 +4,7 @@ require 'boss_mailer'
 require 'boss_mailer/time_parser'
 require 'boss_mailer/mailer'
 require 'optparse'
-require 'pry'
+require 'mail'
 
 options = {}
 OptionParser.new do |opts|
@@ -40,7 +40,6 @@ mailer_setting = {
 }
 
 mailer = BossMailer::Mailer.new mailer_setting, working_time
-binding.pry
 mailer.mail
 
 
