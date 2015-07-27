@@ -1,15 +1,10 @@
 module BossMailer
   class Mailer
     def initialize(mail_settings, working_hours)
-      @mail_settings = mail_settings
       @working_hours = working_hours
-      body_content = mail_body
-      @mailer = Mail.new do
-        to mail_settings[:to]
-        from mail_settings[:from]
-        subject mail_settings[:subject]
-        body body_content
-      end
+      @mail_settings = mail_settings
+      @mail_settings[:body] = mail_body
+      @mailer = Mail.new @mail_settings
     end
 
     def mail
@@ -17,8 +12,10 @@ module BossMailer
       @mailer.deliver
     end
 
+    private
+
     def mail_body
-      "Start #{@working_hours[:start]} \n\
+      "Start #{@working_hours[:start]}\n\
       Ende #{@working_hours[:end]}\n\
       Pause #{@working_hours[:pause]}"
     end
