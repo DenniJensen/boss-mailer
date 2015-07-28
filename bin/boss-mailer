@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'boss_mailer'
+require 'boss_mailer/config_deliverer'
 require 'boss_mailer/time_parser'
 require 'boss_mailer/mailer'
 require 'optparse'
@@ -17,32 +18,33 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-config_path = ENV['HOME'] + '/.boss-mailer.yml'
+CONFIG_PATH = ENV['HOME'] + '/.boss-mailer.yml'
 
 if options[:init]
-  if File.exists?(config_path) && !options[:force]
-    puts "file alread exists in #{config_path}"
+  if File.exists?(CONFIG_PATH) && !options[:force]
+    puts "file alread exists in #{CONFIG_PATH}"
     puts "Use --init --force to reinstall config file"
     exit 1
   else
-    FileUtils.cp('config_file_example.yml', config_path)
-    puts "Config File created in #{config_path}"
+    config = BossMailer::ConfigDeliverer.config
+    File.open(CONFIG_PATH, 'w') { |file| YAML.dump(config, file) }
+    puts "Config File created in #{CONFIG_PATH}"
     puts "Please fill in all the information in this config file"
     exit 0
   end
 end
 
-unless File.exists? config_path
+unless File.exists? CONFIG_PATH
   puts 'No Config file found, please use --init to initialize one'
   puts 'After creating a config file, please fill in the mail informations'
   exit 1
 end
 
-config = YAML.load_file(config_path)
+config = YAML.load_file(CONFIG_PATH)
 mailer_settings = config[:mail_settings]
 
 unless mailer_settings[:to] or mailer_settings[:from] or mailer_settings[:subject]
-  puts "Configuration is missing in: #{config_path}"
+  puts "Configuration is missing in: #{CONFIG_PATH}"
   exit 1
 end
 
