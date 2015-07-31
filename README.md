@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/boss-mailer.svg)](http://badge.fury.io/rb/boss-mailer)
 [![Build Status](https://magnum.travis-ci.com/DenniJensen/boss-mailer.svg?token=LXPadLLZHBGUqXF9dTdc)](https://magnum.travis-ci.com/DenniJensen/boss-mailer)
 
 # Boss::Mailer
