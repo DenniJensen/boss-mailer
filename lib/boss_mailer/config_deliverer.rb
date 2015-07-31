@@ -2,7 +2,7 @@ module BossMailer
   class ConfigDeliverer
     def self.config
       {
-        mailer_settings: {
+        mail_settings: {
           from: '',
           to: '',
           subject: '',
