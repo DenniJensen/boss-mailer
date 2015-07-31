@@ -1,5 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/boss-mailer.svg)](http://badge.fury.io/rb/boss-mailer)
 [![Build Status](https://travis-ci.org/DenniJensen/boss-mailer.svg)](https://travis-ci.org/DenniJensen/boss-mailer)
+[![Coverage Status](https://coveralls.io/repos/DenniJensen/boss-mailer/badge.svg?branch=master&service=github)](https://coveralls.io/github/DenniJensen/boss-mailer?branch=master)
 
 # Boss::Mailer
 This is a gem to mail the working hours form the terminal
