@@ -43,7 +43,7 @@ end
 config = YAML.load_file(CONFIG_PATH)
 mailer_settings = config[:mail_settings]
 
-unless mailer_settings[:to] or mailer_settings[:from] or mailer_settings[:subject]
+if mailer_settings[:to].blank? or mailer_settings[:from].blank? or mailer_settings[:subject].blank?
   puts "Configuration is missing in: #{CONFIG_PATH}"
   exit 1
 end
