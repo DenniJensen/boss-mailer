@@ -1,2 +1,4 @@
 #!/usr/bin/env ruby
 require 'boss_mailer'
+
+BossMailer.run

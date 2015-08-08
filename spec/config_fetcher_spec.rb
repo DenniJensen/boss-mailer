@@ -28,26 +28,13 @@ describe BossMailer::ConfigFetcher do
 
     it 'fetchtes the mail' do
       expect(config_fetcher.mail_settings).not_to eq nil
-    end
-  end
-
-  context 'working hour information' do
-    let(:working_hours) { config_fetcher.working_hours }
-
-    before do
-      allow_any_instance_of(BossMailer::ConfigFetcher).to(
-        receive(:settings) { mail_settings }
-      )
+      expect(config_fetcher.mail_settings[:from]).to eq 'sender@test.com'
+      expect(config_fetcher.mail_settings[:to]).to eq 'receiver@test.com'
+      expect(config_fetcher.mail_settings[:subject]).to eq 'Test Subject'
     end
 
-    it 'fetches working hours' do
-      expect(working_hours).not_to eq nil
-    end
-
-    it 'includes not information from mailing settings' do
-      %i(to from subject).each do |mail_info|
-        expect(working_hours[mail_info]).to eq nil
-      end
+    it 'removes unnecessary parts of the input hash' do
+      expect(config_fetcher.mail_settings[:working_hours]).to eq nil
     end
   end
 end
