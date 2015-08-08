@@ -7,11 +7,11 @@ module BossMailer
           to: '',
           subject: '',
           options: {
-            address: "smtp.gmail.com",
+            address: 'smtp.gmail.com',
             port: 587,
-            user_name: "<username>",
-            password: "<password>",
-            authentication: "plain",
+            user_name: '<username>',
+            password: '<password>',
+            authentication: 'plain',
             enable_starttls_auto: true
           }
         }

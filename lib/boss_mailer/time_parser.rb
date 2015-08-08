@@ -1,8 +1,8 @@
 module BossMailer
   class TimeParser
     def parse(time)
-      raise if time.size > 5
-      @time = time.split ":"
+      fail if time.size > 5
+      @time = time.split ':'
       return parse_seperated_time unless @time.first == time
       parse_mixed_time
     end
